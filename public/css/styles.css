@@ -3,3 +3,13 @@ body {
     color: red;
     font-size:24px;
 }
+
+.btn {
+  width:auto;
+  align-items: center;
+}
+
+.well {
+  padding-left: 100px;
+  padding-right: 100px;
+}
