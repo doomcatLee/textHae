@@ -1,10 +1,11 @@
 'use strict';
 
 // simple express server
+var http = require('http');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-
+var sms = require('./sms.js');
 
 var router = express.Router();
 
@@ -13,7 +14,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-//DAT MIDDLEWARE SHIT
+// // DAT MIDDLEWARE SHIT
 // //First middleware before response is sent
 // app.use(function(req, res, next){
 // 	console.log("Start");
@@ -28,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 // app.use('/', function(req, res){
 // 	console.log('End');
 // });
-//
+
 
 //ROUTES FOR HTML
 app.get('/', function(req, res) {
@@ -56,7 +57,7 @@ app.get('/message', function(req, res) {
 
 app.post('/message', function(req, res) {
     var message = req.body.message;
-    var sms = new Sms();
+    sms.sendSms(message);
     console.log(message);
 
     res.sendfile('./public/index.html');
@@ -96,6 +97,16 @@ app.use(function(req, res, next){
 	//required for the current request and is in the next middleware function/route handler.
 	next();
 });
+
+// http.createServer(function (req, res) {
+//     //Create TwiML response
+//     var twiml = new twilio.TwimlResponse();
+//     twiml.say("Hello from your pals at Twilio! Have fun.");
+//
+//     res.writeHead(200, {'Content-Type': 'text/xml'});
+//     res.end(twiml.toString());
+//
+// }).listen(1337, '127.0.0.1');
 
 
 
