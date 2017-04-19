@@ -3,10 +3,17 @@
 // simple express server
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+
+
 var router = express.Router();
 
+//THIS IS SO YOU CAN TAKE HTML FORM DATA INTO APP.JS
 app.use(express.static('public'));
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
+//DAT MIDDLEWARE SHIT
 // //First middleware before response is sent
 // app.use(function(req, res, next){
 // 	console.log("Start");
@@ -23,18 +30,47 @@ app.use(express.static('public'));
 // });
 //
 
-app.get('/dashboard', function(req, res){
-    res.render('');
-});
-
+//ROUTES FOR HTML
 app.get('/', function(req, res) {
     res.sendfile('./public/index.html');
+});
+
+app.get('/dashboard', function(req, res) {
+    res.sendfile('./public/dashboard.html');
+});
+
+app.get('/call', function(req, res) {
+    res.sendfile('./public/call.html');
+});
+
+app.post('/call', function(req, res) {
+    var phoneNumber = req.body.phone_number;
+    console.log("Your Number" + req.body.phone_number);
+    res.sendfile('./public/index.html');
+});
+
+
+app.get('/message', function(req, res) {
+    res.sendfile('./public/message.html');
+});
+
+app.post('/message', function(req, res) {
+    var message = req.body.message;
+    var sms = new Sms();
+    console.log(message);
+
+    res.sendfile('./public/index.html');
+});
+
+app.get('/schedule', function(req, res) {
+    res.sendfile('./public/schedule.html');
 });
 
 //grab ID from url
 app.get('/:id', function(req, res){
     res.send('Current ID: ' + req.params.id);
 });
+
 
 
 
@@ -53,7 +89,7 @@ app.get('*', function(req, res){
     res.send('Sorry, this is an invalid URL.');
 });
 
-//Simple request time logger
+//Simple request time logger, displays in console of request times.
 app.use(function(req, res, next){
 	console.log("A new request received at " + Date.now());
 	//This function call is very important. It tells that more processing is

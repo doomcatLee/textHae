@@ -4,7 +4,9 @@
   "description": "textMe is an application that sends texts/calls to a person. Send images and automate texts for reminders",
   "main": "app.js",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "express": "^4.8.2",
+    "multer": "^1.3.0",
     "pug": "^2.0.0-beta.12",
     "twilio": "^2.11.1"
   },

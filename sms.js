@@ -1,3 +1,10 @@
+
+
+function Sms(){
+  
+}
+
+
 var client = require('twilio')(
   'ACca9625d5004aecd333d236abdf521852',
   'c4e7a3fb6a522a073e18423a04ac181c'
@@ -13,3 +20,5 @@ client.messages.create({
       console.error(err.message);
     }
 });
+
+exports.smsModule = Sms;

@@ -15,11 +15,12 @@
         <h1>Make a Call</h1>
       </div>
       <div class="jumbotron">
-        <form>
+        <form method="post" action="/call">
           <label for="">Enter Phone Number</label>
-          <input type="text" name="" value="">
-          <button type="submit" name="button">Call</button>
+          <input type="text" name="phone_number">
+          <button class="btn btn-default" type="submit" name="button">Call</button>
         </form>
+        <button class="btn btn-default" type="button"><a href="/">Go back</a></button>
       </div>
     </div>
   </body>
