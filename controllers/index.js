@@ -1,17 +1,10 @@
-var express = require('express');
-var app = express();
+var bodyParser = require('body-parser');
 
-var things = require('./things.js');
-//both index.js and things.js should be in same directory
-app.use('/things', things);
+//To parse URL encoded data
+app.use(bodyParser.urlencoded({ extended: false }))
 
-app.get('/hello', function(req, res){
-	res.send("Hello World!");
-});
+//To parse json data
+app.use(bodyParser.json());
 
-app.post('/hello', function(req, res){
-	res.send("You just called the post method at '/hello'!\n");
-});
-
-
-app.listen(4200);
+app.set('view engine', 'pug');
+app.set('views','./views');
