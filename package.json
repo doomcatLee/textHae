@@ -1,0 +1,25 @@
+{
+  "name": "textme",
+  "version": "1.0.0",
+  "description": "textMe is an application that sends texts/calls to a person. Send images and automate texts for reminders",
+  "main": "sms.js",
+  "dependencies": {
+    "twilio": "^2.11.1"
+  },
+  "devDependencies": {
+    "express": "^4.15.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doomcatLee/textMe.git"
+  },
+  "author": "Alex Lee and Taylor Loftis-Kim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/doomcatLee/textMe/issues"
+  },
+  "homepage": "https://github.com/doomcatLee/textMe#readme"
+}
