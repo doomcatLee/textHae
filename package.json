@@ -2,12 +2,15 @@
   "name": "textme",
   "version": "1.0.0",
   "description": "textMe is an application that sends texts/calls to a person. Send images and automate texts for reminders",
-  "main": "sms.js",
+  "main": "app.js",
   "dependencies": {
+    "express": "^4.8.2",
     "twilio": "^2.11.1"
   },
   "devDependencies": {
-    "express": "^4.15.2"
+    "browser-sync": "^1.3.3",
+    "gulp": "^3.8.7",
+    "gulp-nodemon": "^1.0.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
