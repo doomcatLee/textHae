@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 //ROUTES FOR HTML
 app.get('/', function(req, res) {
-    res.sendfile('index.html');
+    res.sendfile('./public/index.html');
 });
 
 app.get('/dashboard', function(req, res) {
@@ -50,10 +50,6 @@ app.post('/call', function(req, res) {
     res.sendfile('./public/index.html');
 });
 
-
-app.get('/message', function(req, res) {
-    res.sendfile('./public/message.html');
-});
 
 app.post('/message', function(req, res) {
     var message = req.body.message;
