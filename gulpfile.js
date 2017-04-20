@@ -2,37 +2,18 @@
 
 var gulp = require('gulp');
 var browserify = require('browserify');
-var browserSync = require('browser-sync');
 var nodemon = require('gulp-nodemon');
 var del = require('del');
+var uglify = require('gulp-uglify');
+var source = require('vinyl-source-stream');
 var utilities = require('gulp-util');
 var concat = require('gulp-concat');
+var jshint = require('gulp-jshint');
 var buildProduction = utilities.env.production;
 
 
-gulp.task('default', ['browser-sync'], function () {
-});
-
-gulp.task('browser-sync', ['nodemon'], function() {
-	browserSync.init(null, {
-		proxy: "http://localhost:5000",
-        files: ["public/**/*.*"],
-        browser: "google chrome",
-        port: 5000,
-	});
-});
-
-//BUILD
-gulp.task('build', ['clean'], function(){
-  if (buildProduction) {
-    gulp.start('minifyScripts');
-  } else {
-    gulp.start('jsBrowserify');
-  }
-});
-
 gulp.task('jsBrowserify', ['concatInterface'], function() {
-  return browserify({ entries: ['./tmp/allConcat.js'] })
+  return browserify({ entries: ['./public/js/watcher-interface.js'] })
     .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('./build/js'));
@@ -44,25 +25,34 @@ gulp.task('concatInterface', function() {
     .pipe(gulp.dest('./tmp'));
 });
 
+gulp.task("minifyScripts", ["jsBrowserify"], function(){
+  return gulp.src("./build/js/app.js")
+    .pipe(uglify())
+    .pipe(gulp.dest("./build/js"));
+});
 
+gulp.task("build", function(){
+  if (buildProduction) {
+    gulp.start('minifyScripts');
+  } else {
+    gulp.start('jsBrowserify');
+  }
+});
 
 gulp.task("clean", function(){
   return del(['build', 'tmp']);
 });
 
+gulp.task("build", ['clean'], function(){
+  if (buildProduction) {
+    gulp.start('minifyScripts');
+  } else {
+    gulp.start('jsBrowserify');
+  }
+});
 
-gulp.task('nodemon', function (cb) {
-
-	var started = false;
-
-	return nodemon({
-		script: 'app.js'
-	}).on('start', function () {
-		// to avoid nodemon being started multiple times
-		// thanks @matthisk
-		if (!started) {
-			cb();
-			started = true;
-		}
-	});
+gulp.task('jshint', function(){
+  return gulp.src(['js/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });
