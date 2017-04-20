@@ -5,7 +5,7 @@ var http = require('http');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var sms = require('./sms.js');
+var sms = require('./public/js/sms.js');
 
 var router = express.Router();
 
@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 //ROUTES FOR HTML
 app.get('/', function(req, res) {
-    res.sendfile('./public/index.html');
+    res.sendfile('index.html');
 });
 
 app.get('/dashboard', function(req, res) {
