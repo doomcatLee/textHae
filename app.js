@@ -23,8 +23,6 @@ app.get('/', function(req, res) {
 });
 
 
-
-
 app.post('/message', function(req, res) {
   var message = req.body.message;
   var toPhoneNumber = req.body.toPhoneNumber;
@@ -33,12 +31,6 @@ app.post('/message', function(req, res) {
 
   res.sendfile('./public/index.html');
 });
-
-
-// //grab ID from url
-// app.get('/:id', function(req, res) {
-//   res.send('Current ID: ' + req.params.id);
-// });
 
 
 //ANY OTHER ROUTES, HANDLE ERROR
